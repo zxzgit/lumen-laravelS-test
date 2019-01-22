@@ -3,3 +3,6 @@
 Homestead.json
 Homestead.yaml
 .env
+
+# phpstorm ide_helper生成文件排除
+_ide_helper.php

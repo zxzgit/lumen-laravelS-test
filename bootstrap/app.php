@@ -7,6 +7,25 @@ try {
 } catch (Dotenv\Exception\InvalidPathException $e) {
     //
 }
+/*
+|--------------------------------------------------------------------------
+| 开发常量设置
+|--------------------------------------------------------------------------
+|
+| 定义三个开发常量，根据.env中APP_ENV的配置，分别为 'production','local','test'
+|
+|
+|
+*/
+define('ENVIRONMENT_PRO', 'production');
+define('ENVIRONMENT_DEV', 'local');
+define('ENVIRONMENT_TEST', 'test');
+
+define('ENVIRONMENT', env('APP_ENV', 'production'));
+
+define('ENVIRONMENT_IS_PRO', ENVIRONMENT == ENVIRONMENT_PRO);
+define('ENVIRONMENT_IS_DEV', ENVIRONMENT == ENVIRONMENT_DEV);
+define('ENVIRONMENT_IS_TEST', ENVIRONMENT == ENVIRONMENT_TEST);
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +102,8 @@ $app->singleton(
  $app->register(App\Providers\EventServiceProvider::class);
 
 $app->register(Illuminate\Redis\RedisServiceProvider::class);
+
+ENVIRONMENT_IS_DEV && $app->register(Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
